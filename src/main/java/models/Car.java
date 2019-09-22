@@ -1,9 +1,14 @@
 package models;
 
+
 public class Car {
 
-    String _id;
     String name;
+    String make;
+    String model;
     String fuel;
-    int door;
+    String vin;
+    String bodyType;
+    String transmission;
+    int doors;
 }

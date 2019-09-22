@@ -1,0 +1,9 @@
+[
+  {
+    'repeat(10, 10)': {
+      price: '{{floating(0, 1000, 2, "$0.00")}}',
+      quantity: '{{integer(20, 40)}}',
+      name: '{{firstName()}} {{surname()}}',
+    }
+  }
+]
