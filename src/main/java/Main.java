@@ -13,6 +13,10 @@ public class Main {
         Gson gson = new Gson();
         Item item = gson.fromJson(items.get(0).append("dupa", "dupa2").toJson(), Item.class);
         System.out.println("2");
+        String jdbcurl = "jdbc:mysql://localhost:3306";
+
+
+        //Mysql port: 3306, pass: 12345
     }
 
 
