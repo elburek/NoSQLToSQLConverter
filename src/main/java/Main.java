@@ -13,7 +13,6 @@ public class Main {
         Gson gson = new Gson();
         Item item = gson.fromJson(items.get(0).append("dupa", "dupa2").toJson(), Item.class);
         System.out.println("2");
-
     }
 
 
