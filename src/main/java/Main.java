@@ -1,20 +1,19 @@
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.google.gson.Gson;
+import models.Item;
+import org.bson.Document;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase mongoDatabase = mongoClient.getDatabase("MGR");
-        MongoCollection amazon = mongoDatabase.getCollection("Amazon");
-//        List<DBObject> all = new List<DBObject>();
-        List<DBObject> list = new ArrayList<>();
-        amazon.find().into(list);
-        System.out.println(list);
+
+        MongoController mongoController = new MongoController("localhost", 27017, "MGR");
+        List<Document> items = mongoController.extractDocumentsFromCollection("items");
+        Gson gson = new Gson();
+        Item item = gson.fromJson(items.get(0).append("dupa", "dupa2").toJson(), Item.class);
+        System.out.println("2");
     }
+
+
 }
