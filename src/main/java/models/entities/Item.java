@@ -2,15 +2,16 @@ package models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "items")
 public class Item {
 
@@ -20,8 +21,15 @@ public class Item {
     @Column
     private String name;
     @Column
-    private String price;
+    private BigDecimal price;
     @Column
     private Integer quantity;
+    @Column
+    private Category category;
 
+    public enum Category {
+        CAR,
+        SMARTPHONE,
+
+    }
 }

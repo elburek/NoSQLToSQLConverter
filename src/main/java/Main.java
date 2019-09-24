@@ -1,29 +1,8 @@
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import models.entities.Item;
-import org.bson.Document;
-
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
-
-        MongoController mongoController = new MongoController("localhost", 27017, "MGR");
-        List<Document> items = mongoController.extractDocumentsFromCollection("items");
-//        Gson gson = new Gson();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Item.class, new ItemDeserializer())
-                .create();
-        Item item = gson.fromJson(items.get(0).append("dupa", "dupa2").toJson(), Item.class);
-        System.out.println("asda");
-
-
-
-
-
-
-
+        NoSQLToSQLConverter noSQLToSQLConverter = new NoSQLToSQLConverter();
+        noSQLToSQLConverter.convert();
 
 
 //        Item item2;
@@ -40,7 +19,7 @@ public class Main {
 //        }
 //        try {
 //            String jdbcurl = "jdbc:mysql://localhost:3306/mgr?serverTimezone=UTC";
-//            Properties properties = new Properties();
+//            Config properties = new Config();
 //            properties.put("user", "root");
 //            properties.put("password", "12345");
 //            Connection connection = DriverManager.getConnection(jdbcurl, "root", "12345");
@@ -48,30 +27,6 @@ public class Main {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-//
-//
-//        //hibernate
-//        SessionFactory sessionFactory = new Configuration()
-//                .configure("hibernate.cfg.xml")
-//                .addAnnotatedClass(Item.class)
-//                .buildSessionFactory();
-//
-//        Session session = sessionFactory.getCurrentSession();
-//        try {
-//            Item item1 = new Item(null, "elo", "33", 2);
-//            session.beginTransaction();
-//            session.save(item1);
-//            session.getTransaction().commit();
-//        } catch (Exception e) {
-//
-//        } finally {
-//            sessionFactory.close();
-//        }
-
-
-
-
-        //Mysql port: 3306, pass: 12345
     }
 
 
