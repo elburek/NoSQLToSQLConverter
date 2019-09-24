@@ -1,10 +1,12 @@
+package org;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import models.entities.Item;
 import org.bson.Document;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.models.entities.Item;
 
 import java.util.List;
 

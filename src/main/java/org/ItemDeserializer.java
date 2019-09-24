@@ -1,5 +1,7 @@
+package org;
+
 import com.google.gson.*;
-import models.entities.Item;
+import org.models.entities.Item;
 
 import java.lang.reflect.Type;
 

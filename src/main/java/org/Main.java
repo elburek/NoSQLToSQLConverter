@@ -1,3 +1,5 @@
+package org;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class Main {
 //        }
 //        try {
 //            String jdbcurl = "jdbc:mysql://localhost:3306/mgr?serverTimezone=UTC";
-//            Config properties = new Config();
+//            org.Config properties = new org.Config();
 //            properties.put("user", "root");
 //            properties.put("password", "12345");
 //            Connection connection = DriverManager.getConnection(jdbcurl, "root", "12345");
