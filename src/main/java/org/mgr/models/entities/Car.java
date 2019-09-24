@@ -1,4 +1,4 @@
-package org.models.entities;
+package org.mgr.models.entities;
 
 
 public class Car {

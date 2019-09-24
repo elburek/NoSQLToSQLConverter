@@ -1,4 +1,4 @@
-package org.models.entities;
+package org.mgr.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

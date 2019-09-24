@@ -1,4 +1,4 @@
-package org.models;
+package org.mgr.models;
 
 import lombok.Data;
 

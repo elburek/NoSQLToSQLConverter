@@ -1,7 +1,7 @@
-package org.models;
+package org.mgr.models;
 
 import lombok.Data;
-import org.models.entities.Item;
+import org.mgr.models.entities.Item;
 
 import java.util.Date;
 import java.util.List;

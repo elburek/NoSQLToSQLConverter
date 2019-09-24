@@ -1,4 +1,4 @@
-package org;
+package org.mgr;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
