@@ -27,6 +27,8 @@ public class NoSQLToSQLConverter {
         OrderDeserializer orderDeserializer = new OrderDeserializer();
         elements.forEach(element -> orderDeserializer.deserialize(element, orders, items, clients));
 
+
+        //TODO all this shit to MySQL
         //hibernate
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
