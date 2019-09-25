@@ -1,0 +1,32 @@
+[
+  {
+    'repeat(10, 10)': {
+      id: '{{integer(100000000, 999999999)}}',
+      client:
+      {
+        id: '{{integer(100000000, 999999999)}}',
+        firstName: '{{firstName()}}',
+        lastName: '{{surname()}}',
+        address: 'ul. {{street()}} {{integer(1, 9)}}/{{integer(1, 100)}}, {{city()}} {{integer(10, 100)}}-{{integer(100, 999)}}',
+        email(tags) {
+        return `${this.firstName}.${this.lastName}@mail.com`.toLowerCase();
+      },
+      },
+      deliveryAddress: 'ul. {{street()}} {{integer(1, 9)}}/{{integer(1, 100)}}, {{city()}} {{integer(10, 100)}}-{{integer(100, 999)}}',
+      timestamp: '{{date(new Date(2014, 0, 1), new Date()).getTime()}}',
+      items: [
+        {
+          'repeat(5)': {
+            id: '{{integer(100000000, 999999999)}}',
+            name: 'Samsung Galaxy S{{integer(1, 99)}}',
+            price: '{{integer(300, 6000)}}',
+            quantity: '{{integer(1, 20)}}',
+            camera: '{{integer(1, 99)}} Mpx',
+            memory: '{{integer(1, 99)}} GB',
+            category: 'SMARTPHONE',
+          }
+        }
+      ]
+    }
+  }
+]

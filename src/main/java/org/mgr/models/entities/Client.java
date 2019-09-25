@@ -1,4 +1,4 @@
-package models.entities;
+package org.mgr.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,22 +6,25 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "smartphones")
-public class Smartphone extends Item {
+@Table(name = "clients")
+public class Client {
 
+    @Id
     @Column
-    private String frontCamera;
+    private Integer id;
     @Column
-    private String rearCamera;
+    private String firstName;
     @Column
-    private String model;
-    private String memory;
-    private String ram;
-    private Long batteryCapacity;
+    private String lastName;
+    @Column
+    private String address;
+    @Column
+    private String email;
 }

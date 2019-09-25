@@ -1,3 +1,5 @@
+package org.mgr;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -5,10 +7,10 @@ public class Main {
         noSQLToSQLConverter.convert();
 
 
-//        Item item2;
+//        GeneralItem item2;
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        try {
-//            item2 = objectMapper.readValue(items.get(0).append("dupa", "dupa2").toJson(), Item.class);
+//            item2 = objectMapper.readValue(generalItems.get(0).append("dupa", "dupa2").toJson(), GeneralItem.class);
 //
 //        } catch (JsonParseException e) {
 //            e.printStackTrace();
@@ -19,7 +21,7 @@ public class Main {
 //        }
 //        try {
 //            String jdbcurl = "jdbc:mysql://localhost:3306/mgr?serverTimezone=UTC";
-//            Config properties = new Config();
+//            org.mgr.Config properties = new org.mgr.Config();
 //            properties.put("user", "root");
 //            properties.put("password", "12345");
 //            Connection connection = DriverManager.getConnection(jdbcurl, "root", "12345");
