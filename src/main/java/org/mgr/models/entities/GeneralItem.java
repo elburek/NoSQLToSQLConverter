@@ -3,9 +3,9 @@ package org.mgr.models.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.mgr.models.Item;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -13,25 +13,27 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "items")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class GeneralItem {
+public class GeneralItem implements Item {
 
     @Id
     @Column
-    private String id;
-    @Column
-    private String orderId;
+    private Integer id;
     @Column
     private String name;
     @Column
-    private BigDecimal price;
+    private Integer orderId;
+    @Column
+    private Integer price;
     @Column
     private Integer quantity;
-    @Column
-    private Category category;
 
-    public enum Category {
-        CAR,
-        SMARTPHONE,
+    @Override
+    public Integer getId() {
+        return this.id;
+    }
 
+    @Override
+    public void setId(Integer id) {
+        setOrderId(id);
     }
 }

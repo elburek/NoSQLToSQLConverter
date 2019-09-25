@@ -1,6 +1,7 @@
 package org.mgr.models.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,8 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+import java.sql.Timestamp;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,13 +21,13 @@ public class OrderEntity {
 
     @Id
     @Column
-    private long id;
+    private Integer id;
     @Column
-    private long clientId;
+    private Integer clientId;
     @Column
     private String deliveryAddress;
     @Column
-    private long itemId;
+    private Integer itemId;
     @Column
-    private Date date;
+    private Timestamp date;
 }
