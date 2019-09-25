@@ -7,30 +7,30 @@ import org.bson.Document;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.mgr.models.entities.Item;
+import org.mgr.models.entities.GeneralItem;
 
 import java.util.List;
 
 @Slf4j
 public class NoSQLToSQLConverter {
 
-    private final Config config = new Config();
+
 
     public void convert() {
-        MongoController mongoController = new MongoController(config.getMongoHost(), config.getMongoPort(), config.getMongoDatabaseName());
-        List<Document> items = mongoController.extractDocumentsFromCollection("items");
+        MongoController mongoController = new MongoController();
+        List<Document> elements = mongoController.extractDocumentsFromCollection("generalItems");
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Item.class, new ItemDeserializer())
+                .registerTypeAdapter(GeneralItem.class, new ItemDeserializer())
                 .create();
-        Item item = gson.fromJson(items.get(0).append("dupa", "dupa2").toJson(), Item.class);
+        GeneralItem element = gson.fromJson(elements.get(0).append("dupa", "dupa2").toJson(), GeneralItem.class);
         //hibernate
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Item.class)
+                .addAnnotatedClass(GeneralItem.class)
                 .buildSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.save(item);
+            session.save(element);
             session.getTransaction().commit();
         } catch (Exception e) {
             log.error("Hibernate fatality");

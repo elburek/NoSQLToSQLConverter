@@ -7,10 +7,10 @@ public class Main {
         noSQLToSQLConverter.convert();
 
 
-//        Item item2;
+//        GeneralItem item2;
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        try {
-//            item2 = objectMapper.readValue(items.get(0).append("dupa", "dupa2").toJson(), Item.class);
+//            item2 = objectMapper.readValue(generalItems.get(0).append("dupa", "dupa2").toJson(), GeneralItem.class);
 //
 //        } catch (JsonParseException e) {
 //            e.printStackTrace();

@@ -11,13 +11,15 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "items")
-public class Item {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class GeneralItem {
 
     @Id
     @Column
-    private String objectId;
+    private String id;
+    @Column
+    private String orderId;
     @Column
     private String name;
     @Column

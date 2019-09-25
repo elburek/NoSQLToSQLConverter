@@ -6,25 +6,23 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "smartphones")
-public class Smartphone extends GeneralItem {
+@Table(name = "clients")
+public class Client {
 
+    @Id
     @Column
-    private String frontCamera;
+    private long id;
     @Column
-    private String rearCamera;
+    private String name;
     @Column
-    private String model;
+    private String address;
     @Column
-    private String memory;
-    @Column
-    private String ram;
-    @Column
-    private Long batteryCapacity;
+    private String email;
 }
