@@ -7,8 +7,13 @@ import org.bson.Document;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.mgr.deserialization.OrderDeserializer;
+import org.mgr.models.Item;
+import org.mgr.models.Order;
 import org.mgr.models.entities.GeneralItem;
+import org.mgr.models.entities.OrderEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -18,11 +23,11 @@ public class NoSQLToSQLConverter {
 
     public void convert() {
         MongoController mongoController = new MongoController();
-        List<Document> elements = mongoController.extractDocumentsFromCollection("generalItems");
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(GeneralItem.class, new ItemDeserializer())
-                .create();
-        GeneralItem element = gson.fromJson(elements.get(0).append("dupa", "dupa2").toJson(), GeneralItem.class);
+        List<Document> elements = mongoController.extractDocumentsFromCollection("orders");
+        List<Item> items = new ArrayList<>();
+        List<OrderEntity> orders = new ArrayList<>();
+        elements.forEach(element -> deserializeOrder(element, orders, items));
+
         //hibernate
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -30,10 +35,17 @@ public class NoSQLToSQLConverter {
                 .buildSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.save(element);
+            orders.forEach(session::save);
             session.getTransaction().commit();
         } catch (Exception e) {
             log.error("Hibernate fatality");
         }
+    }
+
+    private void deserializeOrder(Document element, List<OrderEntity> orders, List<Item> items) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Order.class, new OrderDeserializer())
+                .create();
+        orders.add(gson.fromJson(element.toJson(), OrderEntity.class));
     }
 }

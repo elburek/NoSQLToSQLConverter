@@ -9,8 +9,10 @@ import java.util.List;
 @Data
 public class Order {
 
+    private long id;
     private Client client;
-    private Address deliveryAddress;
-    private List<Item> items;
+    private String deliveryAddress;
     private Date date;
+    private List<Item> items;
+
 }
