@@ -1,4 +1,4 @@
-package org.mgr.models;
+package org.mgr.models.entities;
 
 public interface Item {
 

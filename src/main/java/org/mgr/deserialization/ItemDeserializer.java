@@ -2,10 +2,10 @@ package org.mgr.deserialization;
 
 import com.google.gson.Gson;
 import org.bson.Document;
-import org.mgr.Category;
-import org.mgr.models.Item;
+import org.mgr.models.Category;
 import org.mgr.models.entities.Car;
 import org.mgr.models.entities.GeneralItem;
+import org.mgr.models.entities.Item;
 import org.mgr.models.entities.Smartphone;
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class ItemDeserializer {
 
+    private static final String CATEGORY = "category";
     private final Gson gson = new Gson();
 
     public List<Item> deserialize(Document order) {
@@ -25,7 +26,7 @@ public class ItemDeserializer {
 
     private Item mapToItem(Document rawItem, Integer orderId) {
         Item item;
-        switch (Category.valueOf(rawItem.getString("category"))) {
+        switch (Category.valueOf(rawItem.getString(CATEGORY))) {
             case SMARTPHONE:
                 item = gson.fromJson(rawItem.toJson(), Smartphone.class);
                 break;

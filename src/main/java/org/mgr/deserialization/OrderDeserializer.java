@@ -2,8 +2,8 @@ package org.mgr.deserialization;
 
 import com.google.gson.Gson;
 import org.bson.Document;
-import org.mgr.models.Item;
 import org.mgr.models.entities.Client;
+import org.mgr.models.entities.Item;
 import org.mgr.models.entities.OrderEntity;
 
 import java.sql.Timestamp;
@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 
 public class OrderDeserializer {
 
+    private static final String CLIENT = "client";
+    private static final String ID = "id";
+    private static final String DELIVERY_ADDRESS = "deliveryAddress";
+    private static final String TIMESTAMP = "timestamp";
     private final Gson gson = new Gson();
     private final ItemDeserializer itemDeserializer = new ItemDeserializer();
 
@@ -36,10 +40,10 @@ public class OrderDeserializer {
 
     private OrderEntity buildOrderEntity(Document order, Integer clientId, Integer itemId) {
         return OrderEntity.builder()
-                .orderId(order.getInteger("id"))
+                .orderId(order.getInteger(ID))
                 .clientId(clientId)
-                .deliveryAddress(order.getString("deliveryAddress"))
-                .date(new Timestamp(order.getLong("timestamp")))
+                .deliveryAddress(order.getString(DELIVERY_ADDRESS))
+                .date(new Timestamp(order.getLong(TIMESTAMP)))
                 .itemId(itemId)
                 .build();
     }
