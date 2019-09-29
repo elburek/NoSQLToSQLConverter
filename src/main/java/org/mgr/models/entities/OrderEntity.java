@@ -21,13 +21,13 @@ public class OrderEntity {
 
     @Id
     @Column
-    private Integer id;
+    private Integer itemId;
+    @Column
+    private Integer orderId;
     @Column
     private Integer clientId;
     @Column
     private String deliveryAddress;
-    @Column
-    private Integer itemId;
     @Column
     private Timestamp date;
 }
