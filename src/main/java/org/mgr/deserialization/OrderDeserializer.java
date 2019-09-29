@@ -2,48 +2,43 @@ package org.mgr.deserialization;
 
 import com.google.gson.Gson;
 import org.bson.Document;
-import org.mgr.Category;
 import org.mgr.models.Item;
-import org.mgr.models.entities.*;
+import org.mgr.models.entities.Client;
+import org.mgr.models.entities.OrderEntity;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderDeserializer {
 
     private final Gson gson = new Gson();
+    private final ItemDeserializer itemDeserializer = new ItemDeserializer();
 
     public void deserialize(Document order, List<OrderEntity> orders, List<Item> items, List<Client> clients) {
-        Client client = gson.fromJson(gson.toJson(order.get("client")), Client.class);
+        Client client = getClient(order);
+        List<Item> deserializedItems = itemDeserializer.deserialize(order);
+        List<OrderEntity> deserializedOrders = temp(deserializedItems, order, client.getId());
         clients.add(client);
-        List<Document> rawItems = (ArrayList) order.get("items");
-        rawItems.forEach(rawItem -> items.add(deserializeItem(rawItem, order.getInteger("id"))));
-        items.forEach(item -> orders.add(buildOrderEntity(order, client.getId(), item.getId())));
+        items.addAll(deserializedItems);
+        orders.addAll(deserializedOrders);
     }
 
-    private Item deserializeItem(Document rawItem, Integer orderId) {
-        Item item;
-        switch (Category.valueOf(rawItem.getString("category"))) {
-            case SMARTPHONE:
-                item = gson.fromJson(rawItem.toJson(), Smartphone.class);
-                break;
-            case CAR:
-                item = gson.fromJson(rawItem.toJson(), Car.class);
-                break;
-            default:
-                item = gson.fromJson(rawItem.toJson(), GeneralItem.class);
-                break;
-        }
-        item.setId(orderId);
-        return item;
+    private Client getClient(Document order) {
+        return gson.fromJson(gson.toJson(order.get("client")), Client.class);
+    }
+
+    private List<OrderEntity> temp(List<Item> deserializedItems, Document order, Integer clientId) {
+        return deserializedItems.stream()
+                .map(deserializedItem -> buildOrderEntity(order, clientId, deserializedItem.getId()))
+                .collect(Collectors.toList());
     }
 
     private OrderEntity buildOrderEntity(Document order, Integer clientId, Integer itemId) {
         return OrderEntity.builder()
-                .id(order.getInteger("id"))
+                .orderId(order.getInteger("id"))
                 .clientId(clientId)
-                .deliveryAddress(order.getString("deliverAddress"))
+                .deliveryAddress(order.getString("deliveryAddress"))
                 .date(new Timestamp(order.getLong("timestamp")))
                 .itemId(itemId)
                 .build();

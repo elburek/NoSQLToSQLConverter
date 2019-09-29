@@ -27,9 +27,9 @@ public class Car implements Item {
     @Column
     private Integer quantity;
     @Column
-    Integer horsePower;
+    private Integer horsePower;
     @Column
-    int doors;
+    private int doors;
     @Column
     @Enumerated(EnumType.STRING)
     Transmission transmission;
