@@ -3,10 +3,8 @@ package org.mgr.deserialization;
 import com.google.gson.Gson;
 import org.bson.Document;
 import org.mgr.models.Category;
-import org.mgr.models.entities.Car;
-import org.mgr.models.entities.GeneralItem;
-import org.mgr.models.entities.Item;
-import org.mgr.models.entities.Smartphone;
+import org.mgr.models.Item;
+import org.mgr.models.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +31,23 @@ public class ItemDeserializer {
             case CAR:
                 item = gson.fromJson(rawItem.toJson(), Car.class);
                 break;
+            case GRAPHIC_CARD:
+                item = gson.fromJson(rawItem.toJson(), GraphicCard.class);
+                break;
+            case NOTEBOOK:
+                item = mapToNotebook(rawItem);
+                break;
             default:
                 item = gson.fromJson(rawItem.toJson(), GeneralItem.class);
                 break;
         }
         item.setId(orderId);
         return item;
+    }
+
+    private Item mapToNotebook(Document rawItem) {
+        Notebook notebook = gson.fromJson(rawItem.toJson(), Notebook.class);
+        notebook.setGraphicCardId(notebook.getGraphicCard().getId());
+        return notebook;
     }
 }

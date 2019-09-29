@@ -1,0 +1,31 @@
+[
+  {
+    'repeat(10, 10)': {
+      id: '{{integer(100000000, 999999999)}}',
+      client:
+      {
+        id: '{{integer(100000000, 999999999)}}',
+        firstName: '{{firstName()}}',
+        lastName: '{{surname()}}',
+        address: 'ul. {{street()}} {{integer(1, 9)}}/{{integer(1, 100)}}, {{city()}} {{integer(10, 100)}}-{{integer(100, 999)}}',
+        email(tags) {
+        return `${this.firstName}.${this.lastName}@mail.com`.toLowerCase();
+      },
+      },
+      deliveryAddress: 'ul. {{street()}} {{integer(1, 9)}}/{{integer(1, 100)}}, {{city()}} {{integer(10, 100)}}-{{integer(100, 999)}}',
+      timestamp: '{{date(new Date(2014, 0, 1), new Date()).getTime()}}',
+      items: [
+        {
+          'repeat(5)': {
+            id: '{{integer(100000000, 999999999)}}',
+            name: 'NVIDIA GEFORCE {{integer(7, 9)}}',
+            price: '{{integer(555, 9999)}}',
+            quantity: '{{integer(1, 9)}}',
+            memory: '{{random("1024","2048", "4096")}}',
+            category: 'GRAPHIC_CARD',
+          }
+        }
+      ]
+    }
+  }
+]

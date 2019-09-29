@@ -3,6 +3,7 @@ package org.mgr.models.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.mgr.models.Item;
 
 import javax.persistence.*;
 

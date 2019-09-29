@@ -19,6 +19,8 @@ public class HibernateController {
                 .addAnnotatedClass(Client.class)
                 .addAnnotatedClass(OrderEntity.class)
                 .addAnnotatedClass(Smartphone.class)
+                .addAnnotatedClass(GraphicCard.class)
+                .addAnnotatedClass(Notebook.class)
                 .buildSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
