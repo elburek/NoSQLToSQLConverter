@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import org.bson.Document;
 import org.mgr.models.Category;
 import org.mgr.models.Item;
+import org.mgr.models.MultiLevelItem;
 import org.mgr.models.entities.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +37,7 @@ public class ItemDeserializer {
                 item = gson.fromJson(rawItem.toJson(), GraphicCard.class);
                 break;
             case NOTEBOOK:
-                item = mapToNotebook(rawItem);
+                item = mapFromMultiLevelItem(rawItem, Notebook.class);
                 break;
             default:
                 item = gson.fromJson(rawItem.toJson(), GeneralItem.class);
@@ -45,9 +47,9 @@ public class ItemDeserializer {
         return item;
     }
 
-    private Item mapToNotebook(Document rawItem) {
-        Notebook notebook = gson.fromJson(rawItem.toJson(), Notebook.class);
-        notebook.setGraphicCardId(notebook.getGraphicCard().getId());
-        return notebook;
+    private <T> T mapFromMultiLevelItem(Document rawItem, Type type) {
+        MultiLevelItem multiLevelItem = gson.fromJson(rawItem.toJson(), type);
+        multiLevelItem.setInternalItemId(multiLevelItem.getInternalItemId());
+        return (T) multiLevelItem;
     }
 }

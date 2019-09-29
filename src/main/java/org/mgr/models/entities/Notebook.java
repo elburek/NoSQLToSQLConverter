@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.mgr.models.Item;
+import org.mgr.models.MultiLevelItem;
 
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "notebooks")
-public class Notebook implements Item {
+public class Notebook implements MultiLevelItem, Item {
 
     @Id
     @Column
@@ -40,5 +41,15 @@ public class Notebook implements Item {
     @Override
     public void setId(Integer id) {
         setOrderId(id);
+    }
+
+    @Override
+    public Integer getInternalItemId() {
+        return graphicCard.getId();
+    }
+
+    @Override
+    public void setInternalItemId(Integer id) {
+        setGraphicCardId(id);
     }
 }
